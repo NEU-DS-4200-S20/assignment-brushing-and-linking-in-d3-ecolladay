@@ -23,7 +23,13 @@ function table() {
     // a <th>
     // See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table
 
-    // YOUR CODE HERE
+    var header = table.append("thead").append("tr")
+      .selectAll("th")
+      .data(tableHeaders)
+      .enter().append("th")
+      .text(function(d){
+        return d;
+      })
 
     // Then, you add a row for each row of the data.  Within each row, you
     // add a cell for each piece of data in the row.
@@ -31,7 +37,17 @@ function table() {
     // Then, for each table row, you add a table cell.  You can do this with
     // two different calls to enter() and data(), or with two different loops.
 
-    // YOUR CODE HERE
+    var rows = table.append("tbody")
+      .selectAll("tr")
+      .data(data)
+      .enter().append("tr");
+    var cells = rows.selectAll("td")
+      .data(d => d3.values(d))
+      .enter().append("td")
+      .text(function(d){
+        return d
+      });
+      
 
 
     // Then, add code to allow for brushing.  Note, this is handled differently
@@ -46,6 +62,29 @@ function table() {
     // and when the mouse is down, keep track of any rows that have been mouseover'd
 
     // YOUR CODE HERE
+
+    var mouseover = d3.selectAll("tr")
+      .on("mouseover", (d, val, elements) =>{
+      d3.select(elements[val]).classed("mouseover", true)
+      if (mouseover) {
+        d3.select(elements[val]).classed("selected", true)
+        var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+        dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
+      }
+      })
+      .on("mouseup", (d,val,elements) => {
+        mouseover = false
+      })
+      .on("mouseover", (d, val, elements) => {
+       d3.selectAll(".selected").classed("selected", false)
+       mouseover = true
+       d3.select(elements[val]).classed("selected", true)
+       var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+       dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
+      })
+      .on("mouseoff", (d,val,elements) => {
+        d3.select(elements[val]).classed("mouseover", false)
+      });
 
     return chart;
   }
