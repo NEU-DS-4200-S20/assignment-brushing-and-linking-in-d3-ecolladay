@@ -65,9 +65,10 @@ function table() {
 
     var mouseover = d3.selectAll("tr")
       .on("mouseover", (d, val, elements) =>{
-      d3.select(elements[val]).classed("mouseover", true)
+      d3.select(elements[val]).classed("mouseover", true).style("background-color", "bisque")
       if (mouseover) {
         d3.select(elements[val]).classed("selected", true)
+        .style("background-color", "bisque")
         var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
         dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
       }
@@ -79,6 +80,7 @@ function table() {
        d3.selectAll(".selected").classed("selected", false)
        mouseover = true
        d3.select(elements[val]).classed("selected", true)
+       .style("background-color", "bisque")
        var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
        dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
       })
