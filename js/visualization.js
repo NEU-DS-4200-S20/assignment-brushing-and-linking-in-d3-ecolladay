@@ -62,6 +62,11 @@
 
     // When the table is updated via brushing, tell the line chart and scatterplot
     // YOUR CODE HERE
-    tableData.updateSelection(selectedData)});
+     tableData.updateSelection(selectedData);
+      lcYearPoverty.updateSelection(selectedData);
+      spUnemployMurder.updateSelection(selectedData)
+  
+  
+  });
 
 })());

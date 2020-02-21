@@ -58,7 +58,7 @@ circle.selected {
 
 /* Style for selected marks (table rows) */
 tr.selected {
-  background-color: pink;
+  background-color: #ffc0cb;
 }
 
 /* Pretty table layout */

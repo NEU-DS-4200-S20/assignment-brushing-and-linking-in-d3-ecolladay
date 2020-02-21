@@ -63,12 +63,11 @@ function table() {
 
     // YOUR CODE HERE
 
-    var mouseover = d3.selectAll("tr")
+    var mouseover = d3.selectAll("tr") // Here I created a variable mouseover, to implement the reactive highlighting of the rows
       .on("mouseover", (d, val, elements) =>{
-      d3.select(elements[val]).classed("mouseover", true).style("background-color", "bisque")
+      d3.select(elements[val]).classed("mouseover", true)
       if (mouseover) {
         d3.select(elements[val]).classed("selected", true)
-        .style("background-color", "bisque")
         var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
         dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
       }
@@ -80,12 +79,14 @@ function table() {
        d3.selectAll(".selected").classed("selected", false)
        mouseover = true
        d3.select(elements[val]).classed("selected", true)
-       .style("background-color", "bisque")
+       .style("background-color", "#ffc0cb")
        var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
        dispatcher.call(dispatchString, here, table.selectAll(".selected").data());
       })
       .on("mouseoff", (d,val,elements) => {
-        d3.select(elements[val]).classed("mouseover", false)
+        d3.select(elements[val]).classed("mouseover", false).style("background-color", "")
+        var dispatchString = Object.getOwnPropertyNames(dispatcher._)[0]; // Why does the highlight color stay there?
+        dispatcher.call(dispatchString, here, table.selectAll("").data());
       });
 
     return chart;
