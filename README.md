@@ -2,6 +2,8 @@
 
 This assignment will help you get started with brushing and linking. Please look through all these materials so you understand how to run and organize your code.
 
+My link : https://neu-ds-4200-s20.github.io/assignment-brushing-and-linking-in-d3-ecolladay/
+
 ## Setup
 
 **Under no circumstances should you be editing files via the GitHub user interface.** Do all your edits locally after cloning the repository.
